@@ -1,3 +1,3 @@
 <%php
-	eoch("OK!");
+      echo("OK!");
 >
