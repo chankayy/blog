@@ -1,0 +1,14 @@
+{
+	"cmsName": "BLOG",
+	"version": "v2.0",
+	"author": "Mikoto",
+	"homePage": "index.html",
+	"server": "windows",
+	"dataBase": "8.00.2039",
+	"maxUpload": "2M",
+	"userRights": "超级管理员",
+	"description": "这是一套基于layui的博客管理系统",
+	"powerby": "Copyright 2019 by Mikoto",
+	"record": "@赣ICP备19006165号-1",
+	"keywords": "博客后台后台"
+}

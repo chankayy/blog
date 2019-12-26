@@ -1,0 +1,22 @@
+version: '3'
+services:
+    mysqls:
+      restart: always
+      image: mysql:5.7
+      container_name: mysqltest
+      ports:
+        - "3306:3306"
+
+      environment:
+            MYSQL_ROOT_PASSWORD: 111111
+    
+    javas:
+       image: app:latest
+       container_name: javatest 
+       depends_on:
+          - mysqls
+       environment:
+            IP: mysqls
+            PORT: 3306
+            USERNAME: root
+            PASSWORD: 12345

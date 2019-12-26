@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.franxx.blog.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="top.franxx.blog.pojo.Message" >
+    <id column="msg_id" property="msgId" jdbcType="BIGINT" />
+    <result column="msg_name" property="msgName" jdbcType="VARCHAR" />
+    <result column="msg_img" property="msgImg" jdbcType="VARCHAR" />
+    <result column="msg_time" property="msgTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="top.franxx.blog.pojo.Message" extends="BaseResultMap" >
+    <result column="msg_content" property="msgContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    msg_id, msg_name, msg_img, msg_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    msg_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="top.franxx.blog.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.franxx.blog.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from message
+    where msg_id = #{msgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from message
+    where msg_id = #{msgId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.franxx.blog.pojo.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.franxx.blog.pojo.Message" >
+    insert into message (msg_id, msg_name, msg_img, 
+      msg_time, msg_content)
+    values (#{msgId,jdbcType=BIGINT}, #{msgName,jdbcType=VARCHAR}, #{msgImg,jdbcType=VARCHAR}, 
+      #{msgTime,jdbcType=TIMESTAMP}, #{msgContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.franxx.blog.pojo.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        msg_id,
+      </if>
+      <if test="msgName != null" >
+        msg_name,
+      </if>
+      <if test="msgImg != null" >
+        msg_img,
+      </if>
+      <if test="msgTime != null" >
+        msg_time,
+      </if>
+      <if test="msgContent != null" >
+        msg_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        #{msgId,jdbcType=BIGINT},
+      </if>
+      <if test="msgName != null" >
+        #{msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="msgImg != null" >
+        #{msgImg,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTime != null" >
+        #{msgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgContent != null" >
+        #{msgContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.franxx.blog.pojo.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.msgId != null" >
+        msg_id = #{record.msgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.msgName != null" >
+        msg_name = #{record.msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgImg != null" >
+        msg_img = #{record.msgImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgTime != null" >
+        msg_time = #{record.msgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.msgContent != null" >
+        msg_content = #{record.msgContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update message
+    set msg_id = #{record.msgId,jdbcType=BIGINT},
+      msg_name = #{record.msgName,jdbcType=VARCHAR},
+      msg_img = #{record.msgImg,jdbcType=VARCHAR},
+      msg_time = #{record.msgTime,jdbcType=TIMESTAMP},
+      msg_content = #{record.msgContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set msg_id = #{record.msgId,jdbcType=BIGINT},
+      msg_name = #{record.msgName,jdbcType=VARCHAR},
+      msg_img = #{record.msgImg,jdbcType=VARCHAR},
+      msg_time = #{record.msgTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.franxx.blog.pojo.Message" >
+    update message
+    <set >
+      <if test="msgName != null" >
+        msg_name = #{msgName,jdbcType=VARCHAR},
+      </if>
+      <if test="msgImg != null" >
+        msg_img = #{msgImg,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTime != null" >
+        msg_time = #{msgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgContent != null" >
+        msg_content = #{msgContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where msg_id = #{msgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.franxx.blog.pojo.Message" >
+    update message
+    set msg_name = #{msgName,jdbcType=VARCHAR},
+      msg_img = #{msgImg,jdbcType=VARCHAR},
+      msg_time = #{msgTime,jdbcType=TIMESTAMP},
+      msg_content = #{msgContent,jdbcType=LONGVARCHAR}
+    where msg_id = #{msgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.franxx.blog.pojo.Message" >
+    update message
+    set msg_name = #{msgName,jdbcType=VARCHAR},
+      msg_img = #{msgImg,jdbcType=VARCHAR},
+      msg_time = #{msgTime,jdbcType=TIMESTAMP}
+    where msg_id = #{msgId,jdbcType=BIGINT}
+  </update>
+
+
+<!--  <select id="selectAllMessageAndReply" resultMap="MessageAndReplyResultMap">
+		SELECT
+			*
+		From message
+	</select>
+  <select id="findReplyByMsgId" resultMap="ReplyResultMap">
+		SELECT
+			*
+		From reply
+		WHERE reply_msg_id=#{value}
+	</select>
+  <resultMap type="top.franxx.blog.pojo.MessageAndReply" id="MessageAndReplyResultMap">
+    <id column="msg_id" property="msgId"/>
+    <result column="msg_name" property="msgName"/>
+    <result column="msg_img" property="msgImg"/>
+    <result column="msg_time" property="msgTime"/>
+    <result column="msg_content" property="msgContent"/>
+    &lt;!&ndash; 订单明细信息
+    一个订单关联查询出了多条明细，要使用collection进行映射
+    collection：对关联查询到多条记录映射到集合对象中
+    property：将关联查询到多条记录映射到cn.itcast.mybatis.po.Orders哪个属性
+    ofType：指定映射到list集合属性中pojo的类型
+    通过子查询解决分页问题
+     &ndash;&gt;
+    <collection property="replies" ofType="top.franxx.blog.pojo.Reply" select="top.franxx.blog.mapper.MessageMapper.findReplyByMsgId" column="msg_id">
+
+    </collection>
+  </resultMap>
+  <resultMap type="top.franxx.blog.pojo.Reply" id="ReplyResultMap">
+    &lt;!&ndash; id：订单明细唯 一标识
+    property:要将订单明细的唯 一标识 映射到cn.itcast.mybatis.po.Orderdetail的哪个属性
+      &ndash;&gt;
+    <id column="reply_id" property="replyId"/>
+    <result column="reply_msg_id" property="replyMsgId"/>
+    <result column="reply_name" property="replyName"/>
+    <result column="reply_time" property="replyTime"/>
+    <result column="reply_img" property="replyImg"/>
+    <result column="reply_content" property="replyContent"/>
+  </resultMap>-->
+</mapper>

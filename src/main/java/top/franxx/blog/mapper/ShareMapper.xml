@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.franxx.blog.mapper.ShareMapper" >
+  <resultMap id="BaseResultMap" type="top.franxx.blog.pojo.Share" >
+    <id column="share_id" property="shareId" jdbcType="BIGINT" />
+    <result column="share_name" property="shareName" jdbcType="VARCHAR" />
+    <result column="share_url" property="shareUrl" jdbcType="VARCHAR" />
+    <result column="share_intro" property="shareIntro" jdbcType="VARCHAR" />
+    <result column="share_status" property="shareStatus" jdbcType="VARCHAR" />
+    <result column="share_classify" property="shareClassify" jdbcType="VARCHAR" />
+    <result column="share_download" property="shareDownload" jdbcType="VARCHAR" />
+    <result column="share_img" property="shareImg" jdbcType="VARCHAR" />
+    <result column="share_author" property="shareAuthor" jdbcType="VARCHAR" />
+    <result column="share_time" property="shareTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    share_id, share_name, share_url, share_intro, share_status, share_classify, share_download, 
+    share_img, share_author, share_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.franxx.blog.pojo.ShareExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from share
+    where share_id = #{shareId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from share
+    where share_id = #{shareId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.franxx.blog.pojo.ShareExample" >
+    delete from share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.franxx.blog.pojo.Share" >
+    insert into share (share_id, share_name, share_url, 
+      share_intro, share_status, share_classify, 
+      share_download, share_img, share_author, 
+      share_time)
+    values (#{shareId,jdbcType=BIGINT}, #{shareName,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, 
+      #{shareIntro,jdbcType=VARCHAR}, #{shareStatus,jdbcType=VARCHAR}, #{shareClassify,jdbcType=VARCHAR}, 
+      #{shareDownload,jdbcType=VARCHAR}, #{shareImg,jdbcType=VARCHAR}, #{shareAuthor,jdbcType=VARCHAR}, 
+      #{shareTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="top.franxx.blog.pojo.Share" >
+    insert into share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shareId != null" >
+        share_id,
+      </if>
+      <if test="shareName != null" >
+        share_name,
+      </if>
+      <if test="shareUrl != null" >
+        share_url,
+      </if>
+      <if test="shareIntro != null" >
+        share_intro,
+      </if>
+      <if test="shareStatus != null" >
+        share_status,
+      </if>
+      <if test="shareClassify != null" >
+        share_classify,
+      </if>
+      <if test="shareDownload != null" >
+        share_download,
+      </if>
+      <if test="shareImg != null" >
+        share_img,
+      </if>
+      <if test="shareAuthor != null" >
+        share_author,
+      </if>
+      <if test="shareTime != null" >
+        share_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shareId != null" >
+        #{shareId,jdbcType=BIGINT},
+      </if>
+      <if test="shareName != null" >
+        #{shareName,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIntro != null" >
+        #{shareIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="shareStatus != null" >
+        #{shareStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="shareClassify != null" >
+        #{shareClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDownload != null" >
+        #{shareDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="shareImg != null" >
+        #{shareImg,jdbcType=VARCHAR},
+      </if>
+      <if test="shareAuthor != null" >
+        #{shareAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTime != null" >
+        #{shareTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.franxx.blog.pojo.ShareExample" resultType="java.lang.Integer" >
+    select count(*) from share
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update share
+    <set >
+      <if test="record.shareId != null" >
+        share_id = #{record.shareId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shareName != null" >
+        share_name = #{record.shareName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareUrl != null" >
+        share_url = #{record.shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareIntro != null" >
+        share_intro = #{record.shareIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareStatus != null" >
+        share_status = #{record.shareStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareClassify != null" >
+        share_classify = #{record.shareClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareDownload != null" >
+        share_download = #{record.shareDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareImg != null" >
+        share_img = #{record.shareImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareAuthor != null" >
+        share_author = #{record.shareAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareTime != null" >
+        share_time = #{record.shareTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update share
+    set share_id = #{record.shareId,jdbcType=BIGINT},
+      share_name = #{record.shareName,jdbcType=VARCHAR},
+      share_url = #{record.shareUrl,jdbcType=VARCHAR},
+      share_intro = #{record.shareIntro,jdbcType=VARCHAR},
+      share_status = #{record.shareStatus,jdbcType=VARCHAR},
+      share_classify = #{record.shareClassify,jdbcType=VARCHAR},
+      share_download = #{record.shareDownload,jdbcType=VARCHAR},
+      share_img = #{record.shareImg,jdbcType=VARCHAR},
+      share_author = #{record.shareAuthor,jdbcType=VARCHAR},
+      share_time = #{record.shareTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.franxx.blog.pojo.Share" >
+    update share
+    <set >
+      <if test="shareName != null" >
+        share_name = #{shareName,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        share_url = #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="shareIntro != null" >
+        share_intro = #{shareIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="shareStatus != null" >
+        share_status = #{shareStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="shareClassify != null" >
+        share_classify = #{shareClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDownload != null" >
+        share_download = #{shareDownload,jdbcType=VARCHAR},
+      </if>
+      <if test="shareImg != null" >
+        share_img = #{shareImg,jdbcType=VARCHAR},
+      </if>
+      <if test="shareAuthor != null" >
+        share_author = #{shareAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="shareTime != null" >
+        share_time = #{shareTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where share_id = #{shareId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.franxx.blog.pojo.Share" >
+    update share
+    set share_name = #{shareName,jdbcType=VARCHAR},
+      share_url = #{shareUrl,jdbcType=VARCHAR},
+      share_intro = #{shareIntro,jdbcType=VARCHAR},
+      share_status = #{shareStatus,jdbcType=VARCHAR},
+      share_classify = #{shareClassify,jdbcType=VARCHAR},
+      share_download = #{shareDownload,jdbcType=VARCHAR},
+      share_img = #{shareImg,jdbcType=VARCHAR},
+      share_author = #{shareAuthor,jdbcType=VARCHAR},
+      share_time = #{shareTime,jdbcType=TIMESTAMP}
+    where share_id = #{shareId,jdbcType=BIGINT}
+  </update>
+</mapper>

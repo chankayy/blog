@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.franxx.blog.mapper.ComReplyMapper" >
+  <resultMap id="BaseResultMap" type="top.franxx.blog.pojo.ComReply" >
+    <id column="reply_id" property="replyId" jdbcType="BIGINT" />
+    <result column="reply_com_id" property="replyComId" jdbcType="BIGINT" />
+    <result column="reply_name" property="replyName" jdbcType="VARCHAR" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="reply_img" property="replyImg" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="top.franxx.blog.pojo.ComReply" extends="BaseResultMap" >
+    <result column="reply_content" property="replyContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    reply_id, reply_com_id, reply_name, reply_time, reply_img
+  </sql>
+  <sql id="Blob_Column_List" >
+    reply_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="top.franxx.blog.pojo.ComReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from com_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.franxx.blog.pojo.ComReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from com_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from com_reply
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from com_reply
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.franxx.blog.pojo.ComReplyExample" >
+    delete from com_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.franxx.blog.pojo.ComReply" >
+    insert into com_reply (reply_id, reply_com_id, reply_name, 
+      reply_time, reply_img, reply_content
+      )
+    values (#{replyId,jdbcType=BIGINT}, #{replyComId,jdbcType=BIGINT}, #{replyName,jdbcType=VARCHAR}, 
+      #{replyTime,jdbcType=TIMESTAMP}, #{replyImg,jdbcType=VARCHAR}, #{replyContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.franxx.blog.pojo.ComReply" >
+    insert into com_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        reply_id,
+      </if>
+      <if test="replyComId != null" >
+        reply_com_id,
+      </if>
+      <if test="replyName != null" >
+        reply_name,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+      <if test="replyImg != null" >
+        reply_img,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        #{replyId,jdbcType=BIGINT},
+      </if>
+      <if test="replyComId != null" >
+        #{replyComId,jdbcType=BIGINT},
+      </if>
+      <if test="replyName != null" >
+        #{replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyImg != null" >
+        #{replyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.franxx.blog.pojo.ComReplyExample" resultType="java.lang.Integer" >
+    select count(*) from com_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update com_reply
+    <set >
+      <if test="record.replyId != null" >
+        reply_id = #{record.replyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyComId != null" >
+        reply_com_id = #{record.replyComId,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyName != null" >
+        reply_name = #{record.replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyTime != null" >
+        reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.replyImg != null" >
+        reply_img = #{record.replyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyContent != null" >
+        reply_content = #{record.replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update com_reply
+    set reply_id = #{record.replyId,jdbcType=BIGINT},
+      reply_com_id = #{record.replyComId,jdbcType=BIGINT},
+      reply_name = #{record.replyName,jdbcType=VARCHAR},
+      reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      reply_img = #{record.replyImg,jdbcType=VARCHAR},
+      reply_content = #{record.replyContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update com_reply
+    set reply_id = #{record.replyId,jdbcType=BIGINT},
+      reply_com_id = #{record.replyComId,jdbcType=BIGINT},
+      reply_name = #{record.replyName,jdbcType=VARCHAR},
+      reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      reply_img = #{record.replyImg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.franxx.blog.pojo.ComReply" >
+    update com_reply
+    <set >
+      <if test="replyComId != null" >
+        reply_com_id = #{replyComId,jdbcType=BIGINT},
+      </if>
+      <if test="replyName != null" >
+        reply_name = #{replyName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyImg != null" >
+        reply_img = #{replyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="top.franxx.blog.pojo.ComReply" >
+    update com_reply
+    set reply_com_id = #{replyComId,jdbcType=BIGINT},
+      reply_name = #{replyName,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      reply_img = #{replyImg,jdbcType=VARCHAR},
+      reply_content = #{replyContent,jdbcType=LONGVARCHAR}
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.franxx.blog.pojo.ComReply" >
+    update com_reply
+    set reply_com_id = #{replyComId,jdbcType=BIGINT},
+      reply_name = #{replyName,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      reply_img = #{replyImg,jdbcType=VARCHAR}
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.franxx.blog.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="top.franxx.blog.pojo.Log" >
+    <id column="log_id" property="logId" jdbcType="BIGINT" />
+    <result column="log_url" property="logUrl" jdbcType="VARCHAR" />
+    <result column="log_req" property="logReq" jdbcType="VARCHAR" />
+    <result column="log_ip" property="logIp" jdbcType="VARCHAR" />
+    <result column="log_taking" property="logTaking" jdbcType="VARCHAR" />
+    <result column="log_status" property="logStatus" jdbcType="INTEGER" />
+    <result column="log_user_id" property="logUserId" jdbcType="BIGINT" />
+    <result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+    <result column="log_content" property="logContent" jdbcType="VARCHAR" />
+    <result column="log_controller" property="logController" jdbcType="VARCHAR" />
+    <result column="log_method" property="logMethod" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    log_id, log_url, log_req, log_ip, log_taking, log_status, log_user_id, log_time, 
+    log_content, log_controller, log_method
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.franxx.blog.pojo.LogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.franxx.blog.pojo.LogExample" >
+    delete from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.franxx.blog.pojo.Log" >
+    insert into log (log_id, log_url, log_req, 
+      log_ip, log_taking, log_status, 
+      log_user_id, log_time, log_content, 
+      log_controller, log_method)
+    values (#{logId,jdbcType=BIGINT}, #{logUrl,jdbcType=VARCHAR}, #{logReq,jdbcType=VARCHAR}, 
+      #{logIp,jdbcType=VARCHAR}, #{logTaking,jdbcType=VARCHAR}, #{logStatus,jdbcType=INTEGER}, 
+      #{logUserId,jdbcType=BIGINT}, #{logTime,jdbcType=TIMESTAMP}, #{logContent,jdbcType=VARCHAR}, 
+      #{logController,jdbcType=VARCHAR}, #{logMethod,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.franxx.blog.pojo.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="logUrl != null" >
+        log_url,
+      </if>
+      <if test="logReq != null" >
+        log_req,
+      </if>
+      <if test="logIp != null" >
+        log_ip,
+      </if>
+      <if test="logTaking != null" >
+        log_taking,
+      </if>
+      <if test="logStatus != null" >
+        log_status,
+      </if>
+      <if test="logUserId != null" >
+        log_user_id,
+      </if>
+      <if test="logTime != null" >
+        log_time,
+      </if>
+      <if test="logContent != null" >
+        log_content,
+      </if>
+      <if test="logController != null" >
+        log_controller,
+      </if>
+      <if test="logMethod != null" >
+        log_method,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=BIGINT},
+      </if>
+      <if test="logUrl != null" >
+        #{logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logReq != null" >
+        #{logReq,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null" >
+        #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logTaking != null" >
+        #{logTaking,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null" >
+        #{logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logUserId != null" >
+        #{logUserId,jdbcType=BIGINT},
+      </if>
+      <if test="logTime != null" >
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logContent != null" >
+        #{logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="logController != null" >
+        #{logController,jdbcType=VARCHAR},
+      </if>
+      <if test="logMethod != null" >
+        #{logMethod,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.franxx.blog.pojo.LogExample" resultType="java.lang.Integer" >
+    select count(*) from log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update log
+    <set >
+      <if test="record.logId != null" >
+        log_id = #{record.logId,jdbcType=BIGINT},
+      </if>
+      <if test="record.logUrl != null" >
+        log_url = #{record.logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logReq != null" >
+        log_req = #{record.logReq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logIp != null" >
+        log_ip = #{record.logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logTaking != null" >
+        log_taking = #{record.logTaking,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logStatus != null" >
+        log_status = #{record.logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.logUserId != null" >
+        log_user_id = #{record.logUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.logTime != null" >
+        log_time = #{record.logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logContent != null" >
+        log_content = #{record.logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logController != null" >
+        log_controller = #{record.logController,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logMethod != null" >
+        log_method = #{record.logMethod,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update log
+    set log_id = #{record.logId,jdbcType=BIGINT},
+      log_url = #{record.logUrl,jdbcType=VARCHAR},
+      log_req = #{record.logReq,jdbcType=VARCHAR},
+      log_ip = #{record.logIp,jdbcType=VARCHAR},
+      log_taking = #{record.logTaking,jdbcType=VARCHAR},
+      log_status = #{record.logStatus,jdbcType=INTEGER},
+      log_user_id = #{record.logUserId,jdbcType=BIGINT},
+      log_time = #{record.logTime,jdbcType=TIMESTAMP},
+      log_content = #{record.logContent,jdbcType=VARCHAR},
+      log_controller = #{record.logController,jdbcType=VARCHAR},
+      log_method = #{record.logMethod,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.franxx.blog.pojo.Log" >
+    update log
+    <set >
+      <if test="logUrl != null" >
+        log_url = #{logUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logReq != null" >
+        log_req = #{logReq,jdbcType=VARCHAR},
+      </if>
+      <if test="logIp != null" >
+        log_ip = #{logIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logTaking != null" >
+        log_taking = #{logTaking,jdbcType=VARCHAR},
+      </if>
+      <if test="logStatus != null" >
+        log_status = #{logStatus,jdbcType=INTEGER},
+      </if>
+      <if test="logUserId != null" >
+        log_user_id = #{logUserId,jdbcType=BIGINT},
+      </if>
+      <if test="logTime != null" >
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logContent != null" >
+        log_content = #{logContent,jdbcType=VARCHAR},
+      </if>
+      <if test="logController != null" >
+        log_controller = #{logController,jdbcType=VARCHAR},
+      </if>
+      <if test="logMethod != null" >
+        log_method = #{logMethod,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.franxx.blog.pojo.Log" >
+    update log
+    set log_url = #{logUrl,jdbcType=VARCHAR},
+      log_req = #{logReq,jdbcType=VARCHAR},
+      log_ip = #{logIp,jdbcType=VARCHAR},
+      log_taking = #{logTaking,jdbcType=VARCHAR},
+      log_status = #{logStatus,jdbcType=INTEGER},
+      log_user_id = #{logUserId,jdbcType=BIGINT},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      log_content = #{logContent,jdbcType=VARCHAR},
+      log_controller = #{logController,jdbcType=VARCHAR},
+      log_method = #{logMethod,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+</mapper>

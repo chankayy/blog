@@ -1,0 +1,149 @@
+{
+	"contentManagement": [
+		{
+			"title": "文章管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "文章列表",
+					"icon": "&#xe60a;",
+					"href": "page/news/newsList.html",
+					"spread": false,
+					"target": "_self"
+				},
+				{
+					"title": "评论列表",
+					"icon": "&#xe611;",
+					"href": "page/news/newsCommentList.html",
+					"spread": false,
+					"target": "_self"
+				},
+				{
+					"title": "评论回复列表",
+					"icon": "&#xe63a;",
+					"href": "page/news/newsComreplyList.html",
+					"spread": false,
+					"target": "_self"
+				}
+			]
+		},
+		{
+			"title": "留言管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "留言列表",
+					"icon": "&#xe60a;",
+					"href": "page/message/messageList.html",
+					"spread": false,
+					"target": "_self"
+				},
+				{
+					"title": "留言回复列表",
+					"icon": "&#xe63a;",
+					"href": "page/message/messageReplyList.html",
+					"spread": false,
+					"target": "_self"
+				}
+			]
+		},
+		{
+			"title": "其他页面",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "欢迎页面",
+					"icon": "&#xe60c;",
+					"href": "welcome.html",
+					"spread": false,
+					"target": "_blank"
+				},
+				{
+					"title": "404页面",
+					"icon": "&#xe61c;",
+					"href": "page/404.html",
+					"spread": false
+				},
+				{
+					"title": "登录",
+					"icon": "&#xe609;",
+					"href": "page/login/login.html",
+					"spread": false,
+					"target": "_blank"
+				}
+
+			]
+		}
+	],
+	"resourceManagement": [
+		{
+			"title": "资源管理",
+			"icon": "&#xe66e;",
+			"href": "page/share/shareList.html",
+			"spread": false
+		}
+	],
+	"memberCenter": [
+		{
+			"title": "用户中心",
+			"icon": "&#xe612;",
+			"href": "page/user/userList.html",
+			"spread": false
+		},
+		{
+			"title": "会员等级",
+			"icon": "icon-vip",
+			"href": "page/user/userGrade.html",
+			"spread": false
+		}
+	],
+	"systemeSttings": [
+		{
+			"title": "系统基本参数",
+			"icon": "&#xe631;",
+			"href": "page/systemSetting/basicParameter.html",
+			"spread": false
+		},{
+			"title": "系统日志",
+			"icon": "icon-log",
+			"href": "page/systemSetting/logs.html",
+			"spread": false
+		},{
+			"title": "友情链接",
+			"icon": "&#xe64c;",
+			"href": "page/systemSetting/linkList.html",
+			"spread": false
+		},{
+			"title": "图标管理",
+			"icon": "&#xe857;",
+			"href": "page/systemSetting/icons.html",
+			"spread": false
+		}
+	],
+	"seraphApi": [
+		{
+			"title": "三级联动模块",
+			"icon": "icon-mokuai",
+			"href": "page/doc/addressDoc.html",
+			"spread": false
+		},{
+			"title": "bodyTab模块",
+			"icon": "icon-mokuai",
+			"href": "page/doc/bodyTabDoc.html",
+			"spread": false
+		},{
+			"title": "三级菜单",
+			"icon": "icon-mokuai",
+			"href": "page/doc/navDoc.html",
+			"spread": false
+		}
+	]
+}
+
+

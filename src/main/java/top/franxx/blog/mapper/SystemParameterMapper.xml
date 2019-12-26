@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.franxx.blog.mapper.SystemParameterMapper" >
+  <resultMap id="BaseResultMap" type="top.franxx.blog.pojo.SystemParameter" >
+    <result column="cms_name" property="cmsName" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="home_page" property="homePage" jdbcType="VARCHAR" />
+    <result column="server_envir" property="serverEnvir" jdbcType="VARCHAR" />
+    <result column="data_base" property="dataBase" jdbcType="VARCHAR" />
+    <result column="max_upload" property="maxUpload" jdbcType="VARCHAR" />
+    <result column="user_rights" property="userRights" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="powerby" property="powerby" jdbcType="VARCHAR" />
+    <result column="record" property="record" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cms_name, version, author, home_page, server_envir, data_base, max_upload, user_rights, 
+    description, powerby, record, keywords
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="top.franxx.blog.pojo.SystemParameterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from system_parameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="top.franxx.blog.pojo.SystemParameterExample" >
+    delete from system_parameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.franxx.blog.pojo.SystemParameter" >
+    insert into system_parameter (cms_name, version, author, 
+      home_page, server_envir, data_base, 
+      max_upload, user_rights, description, 
+      powerby, record, keywords
+      )
+    values (#{cmsName,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{homePage,jdbcType=VARCHAR}, #{serverEnvir,jdbcType=VARCHAR}, #{dataBase,jdbcType=VARCHAR}, 
+      #{maxUpload,jdbcType=VARCHAR}, #{userRights,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{powerby,jdbcType=VARCHAR}, #{record,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.franxx.blog.pojo.SystemParameter" >
+    insert into system_parameter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cmsName != null" >
+        cms_name,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="homePage != null" >
+        home_page,
+      </if>
+      <if test="serverEnvir != null" >
+        server_envir,
+      </if>
+      <if test="dataBase != null" >
+        data_base,
+      </if>
+      <if test="maxUpload != null" >
+        max_upload,
+      </if>
+      <if test="userRights != null" >
+        user_rights,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="powerby != null" >
+        powerby,
+      </if>
+      <if test="record != null" >
+        record,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cmsName != null" >
+        #{cmsName,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="homePage != null" >
+        #{homePage,jdbcType=VARCHAR},
+      </if>
+      <if test="serverEnvir != null" >
+        #{serverEnvir,jdbcType=VARCHAR},
+      </if>
+      <if test="dataBase != null" >
+        #{dataBase,jdbcType=VARCHAR},
+      </if>
+      <if test="maxUpload != null" >
+        #{maxUpload,jdbcType=VARCHAR},
+      </if>
+      <if test="userRights != null" >
+        #{userRights,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="powerby != null" >
+        #{powerby,jdbcType=VARCHAR},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.franxx.blog.pojo.SystemParameterExample" resultType="java.lang.Integer" >
+    select count(*) from system_parameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update system_parameter
+    <set >
+      <if test="record.cmsName != null" >
+        cms_name = #{record.cmsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homePage != null" >
+        home_page = #{record.homePage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverEnvir != null" >
+        server_envir = #{record.serverEnvir,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataBase != null" >
+        data_base = #{record.dataBase,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxUpload != null" >
+        max_upload = #{record.maxUpload,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRights != null" >
+        user_rights = #{record.userRights,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.powerby != null" >
+        powerby = #{record.powerby,jdbcType=VARCHAR},
+      </if>
+      <if test="record.record != null" >
+        record = #{record.record,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update system_parameter
+    set cms_name = #{record.cmsName,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      home_page = #{record.homePage,jdbcType=VARCHAR},
+      server_envir = #{record.serverEnvir,jdbcType=VARCHAR},
+      data_base = #{record.dataBase,jdbcType=VARCHAR},
+      max_upload = #{record.maxUpload,jdbcType=VARCHAR},
+      user_rights = #{record.userRights,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      powerby = #{record.powerby,jdbcType=VARCHAR},
+      record = #{record.record,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
