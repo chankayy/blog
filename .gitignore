@@ -1,7 +1,16 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-
+.idea/
+.settings/
+.project
+.classpath
+target/
+build/
+out/
+*.log.*
+*.iml
+*.log
 ### STS ###
 .apt_generated
 .classpath
