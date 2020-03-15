@@ -1,9 +1,8 @@
-FROM java:8u111-jdk
-# time zone
-RUN echo "Asia/Chongqing" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
-RUN mkdir /app
-RUN mkdir /app/logs
-ADD app.jar /app/app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
-RUN bash -c 'touch /app/app.jar'
-WORKDIR /app
+FROM frolvlad/alpine-oraclejdk8:slim
+MAINTAINER "Mikoto <1210382799@qq.com>"
+LABEL description="个人博客后台"
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime \
+WORKDIR app
+ADD  target/blog-latest.jar /app/app.jar
+EXPOSE 8080
+CMD java -jar /app/app.jar

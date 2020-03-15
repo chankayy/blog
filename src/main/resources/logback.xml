@@ -140,8 +140,8 @@
         <connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
             <dataSource class="com.alibaba.druid.pool.DruidDataSource">
                 <!-- DruidDataSource 中的属性配置 -->
-                <driverClassName>com.mysql.jdbc.Driver</driverClassName>
-                <url>jdbc:mysql://127.0.0.1:3306/blog?serverTimezone=UTC&amp;characterEncoding=utf-8</url>
+                <driverClassName>com.mysql.cj.jdbc.Driver</driverClassName>
+                <url>jdbc:mysql://47.103.53.243/blog?serverTimezone=UTC&amp;characterEncoding=utf-8</url>
                 <username>root</username>
                 <password>111111 </password>
             </dataSource>

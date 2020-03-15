@@ -27,16 +27,16 @@ public class DruidConfig {
     // mapper.java 存放路径，被@MapperScan扫描的，注入 sqlsession的
     protected final static String MAPPER_PACKAGE = "top.franxx.blog.mapper";
 
-    @Value("${spring.datasource.base.url}")
+    @Value("${spring.datasource.url}")
     private String url;
 
-    @Value("${spring.datasource.base.username}")
+    @Value("${spring.datasource.username}")
     private String user;
 
-    @Value("${spring.datasource.base.password}")
+    @Value("${spring.datasource.password}")
     private String password;
 
-    @Value("${spring.datasource.base.driver-class-name}")
+    @Value("${spring.datasource.driver-class-name}")
     private String driverClass;
 
 

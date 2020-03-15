@@ -2,7 +2,7 @@ server:
   port: 8080
 
 ftp:
-  host: 47.103.53.243 #部署到服务器后用 localhost  本地47.103.53.243
+  host: localhost #部署到服务器后用 localhost  本地47.103.53.243
   port: 21
   username: ftpuser
   password: 111111
@@ -10,7 +10,7 @@ ftp:
   imagBaseUrl: http://image.franxx.top/images
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/blog?serverTimezone=UTC&characterEncoding=utf-8
+    url: jdbc:mysql://47.103.53.243:3306/blog?serverTimezone=UTC&characterEncoding=utf-8
     username: root
     password: 111111
     driver-class-name: com.mysql.cj.jdbc.Driver

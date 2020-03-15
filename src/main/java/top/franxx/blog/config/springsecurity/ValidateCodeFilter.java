@@ -19,6 +19,13 @@ public class ValidateCodeFilter extends OncePerRequestFilter {  //保证过滤�
 
     private AuthenticationFailureHandler authenticationFailureHandler;
 
+    public AuthenticationFailureHandler getAuthenticationFailureHandler() {
+        return authenticationFailureHandler;
+    }
+
+    public void setAuthenticationFailureHandler(AuthenticationFailureHandler authenticationFailureHandler) {
+        this.authenticationFailureHandler = authenticationFailureHandler;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

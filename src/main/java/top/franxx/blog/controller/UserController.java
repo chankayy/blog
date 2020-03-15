@@ -162,7 +162,6 @@ public class UserController {
        // R r = new R();
         response.setHeader("Cache-Control", "no-store, no-cache");
         response.setContentType("image/jpeg");
-
         //生成文字验证码
         String text = defaultKaptcha.createText();
         //生成图片验证码
