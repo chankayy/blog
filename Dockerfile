@@ -1,4 +1,4 @@
-FROM registry.cn-shanghai.aliyuncs.com/mikoto/blog-backstage
+FROM registry.cn-shanghai.aliyuncs.com/mikoto/maven:v1
 ADD . /app
 WORKDIR /app/
 RUN mvn clean package
