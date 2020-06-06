@@ -1,4 +1,4 @@
-FROM registry.cn-shanghai.aliyuncs.com/mikoto/blog-backstage:latest
+FROM registry.cn-shanghai.aliyuncs.com/mikoto/blog-backstage:base
 ADD . /app
 WORKDIR /app/
 RUN mvn clean package
