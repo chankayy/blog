@@ -1,9 +1,6 @@
-FROM java:8
-# time zone
-RUN echo "Asia/Chongqing" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
-RUN mkdir /app
-RUN mkdir /app/logs
-ADD /target/app.jar /app/app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
-RUN bash -c 'touch /app/app.jar'
-WORKDIR /app
+FROM maven:3.5.4-alpine
+ADD . /app
+WORKDIR /app/
+RUN mvn clean package
+EXPOSE 8080
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar target/blog-latest.jar
