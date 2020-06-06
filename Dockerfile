@@ -3,4 +3,4 @@ ADD . /app
 WORKDIR /app/
 RUN mvn clean package
 EXPOSE 8080
-ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar target/tim-sign-fys-0.0.1-SNAPSHOT.jar
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar target/blog-latest.jar
