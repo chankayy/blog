@@ -1133,8 +1133,28 @@
 
 
 </script>
-<EMBED src="/files/China-X.mp3" autostart="true" loop="true" hidden="true" />
+<!--<EMBED src="/files/China-X.mp3" autostart="true" loop="true" hidden="true" />-->
 
-
-
-</body></html>
+<audio id="bgmusic" src="/files/China-X.mp3" hidden="true"></audio>
+<!-- 当使用方法1时必须加载 JS-SDK 的 JS 文件, 方法2不需要加载这个 JS -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    // 方法1: 现在微信官方已经推出了微信JS-SDK, 最好还是不要使用"野生"方式, 因为不知道什么时候就可以不能用了!
+    // http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+    // 通过config接口注入权限验证配置后, 在 ready 中 play 一下 audio
+    function autoPlayAudio1() {
+        wx.config({
+            // 配置信息, 即使不正确也能使用 wx.ready
+            debug: false,
+            appId: '',
+            timestamp: 1,
+            nonceStr: '',
+            signature: '',
+            jsApiList: []
+        });
+        wx.ready(function() {
+            document.getElementById('bgmusic').play();
+        });
+    }
+</script>
+</body> </html>
